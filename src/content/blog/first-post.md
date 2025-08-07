@@ -26,42 +26,6 @@ Mollis nunc sed id semper risus in. Convallis a cras semper auctor neque. Diam s
 Mattis ullamcorper velit sed ullamcorper morbi tincidunt. Tortor posuere ac ut consequat semper viverra. Tellus mauris a diam maecenas sed enim ut sem viverra. Venenatis urna cursus eget nunc scelerisque viverra mauris in. Arcu ac tortor dignissim convallis aenean et tortor at. Curabitur gravida arcu ac tortor dignissim convallis aenean et tortor. Egestas tellus rutrum tellus pellentesque eu. Fusce ut placerat orci nulla pellentesque dignissim enim sit amet. Ut enim blandit volutpat maecenas volutpat blandit aliquam etiam. Id donec ultrices tincidunt arcu. Id cursus metus aliquam eleifend mi.
 
 Tempus quam pellentesque nec nam aliquam sem. Risus at ultrices mi tempus imperdiet. Id porta nibh venenatis cras sed felis eget velit. Ipsum a arcu cursus vitae. Facilisis magna etiam tempor orci eu lobortis elementum. Tincidunt dui ut ornare lectus sit. Quisque non tellus orci ac. Blandit libero volutpat sed cras. Nec tincidunt praesent semper feugiat nibh sed pulvinar proin gravida. Egestas integer eget aliquet nibh praesent tristique magna.
-
-<!-- Iklan Teks Melayang di Bawah -->
-<style>
-#iklan-teks {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  background: #f9f9f9;
-  border-top: 1px solid #ccc;
-  z-index: 9999;
-  padding: 12px 40px 12px 12px;
-  font-family: Arial, sans-serif;
-  font-size: 16px;
-  text-align: center;
-  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.15);
-}
-#iklan-teks a {
-  color: #0066cc;
-  text-decoration: underline;
-}
-#iklan-teks .tutup-iklan {
-  position: absolute;
-  top: 8px;
-  right: 12px;
-  font-size: 18px;
-  font-weight: bold;
-  color: #777;
-  cursor: pointer;
-}
-@media screen and (max-width: 600px) {
-  #iklan-teks {
-    font-size: 14px;
-    padding: 10px 30px 10px 10px;
-  }
-}
 </style>
 
 <div id="iklan-teks">
