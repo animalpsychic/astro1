@@ -27,40 +27,44 @@ Mattis ullamcorper velit sed ullamcorper morbi tincidunt. Tortor posuere ac ut c
 
 Tempus quam pellentesque nec nam aliquam sem. Risus at ultrices mi tempus imperdiet. Id porta nibh venenatis cras sed felis eget velit. Ipsum a arcu cursus vitae. Facilisis magna etiam tempor orci eu lobortis elementum. Tincidunt dui ut ornare lectus sit. Quisque non tellus orci ac. Blandit libero volutpat sed cras. Nec tincidunt praesent semper feugiat nibh sed pulvinar proin gravida. Egestas integer eget aliquet nibh praesent tristique magna.
 
-<!-- Iklan Melayang di Bawah -->
+<!-- Iklan Teks Melayang di Bawah -->
 <style>
-#iklan-melayang {
+#iklan-teks {
   position: fixed;
   bottom: 0;
   left: 0;
   width: 100%;
-  background: #fff;
+  background: #f9f9f9;
   border-top: 1px solid #ccc;
   z-index: 9999;
-  padding: 10px;
-  text-align: center;
-  box-shadow: 0 -2px 8px rgba(0,0,0,0.2);
-}
-#iklan-melayang .tutup-iklan {
-  position: absolute;
-  top: 5px;
-  right: 10px;
+  padding: 12px 40px 12px 12px;
+  font-family: Arial, sans-serif;
   font-size: 16px;
+  text-align: center;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.15);
+}
+#iklan-teks a {
+  color: #0066cc;
+  text-decoration: underline;
+}
+#iklan-teks .tutup-iklan {
+  position: absolute;
+  top: 8px;
+  right: 12px;
+  font-size: 18px;
+  font-weight: bold;
+  color: #777;
   cursor: pointer;
-  color: #999;
 }
 @media screen and (max-width: 600px) {
-  #iklan-melayang {
+  #iklan-teks {
     font-size: 14px;
-    padding: 8px;
+    padding: 10px 30px 10px 10px;
   }
 }
 </style>
 
-<div id="iklan-melayang">
-  <span class="tutup-iklan" onclick="document.getElementById('iklan-melayang').style.display='none'">✕</span>
-  <a href="https://link-iklan-anda.com" target="_blank" rel="noopener">
-    <img src="https://via.placeholder.com/300x50?text=Iklan+Anda" alt="Iklan Anda">
-  </a>
+<div id="iklan-teks">
+  <span class="tutup-iklan" onclick="document.getElementById('iklan-teks').style.display='none'">✕</span>
+  Dapatkan layanan spiritual terbaik untuk cinta & rezeki! 👉 <a href="https://link-iklan-anda.com" target="_blank">Klik di sini</a>
 </div>
-
