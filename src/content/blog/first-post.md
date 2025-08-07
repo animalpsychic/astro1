@@ -26,3 +26,41 @@ Mollis nunc sed id semper risus in. Convallis a cras semper auctor neque. Diam s
 Mattis ullamcorper velit sed ullamcorper morbi tincidunt. Tortor posuere ac ut consequat semper viverra. Tellus mauris a diam maecenas sed enim ut sem viverra. Venenatis urna cursus eget nunc scelerisque viverra mauris in. Arcu ac tortor dignissim convallis aenean et tortor at. Curabitur gravida arcu ac tortor dignissim convallis aenean et tortor. Egestas tellus rutrum tellus pellentesque eu. Fusce ut placerat orci nulla pellentesque dignissim enim sit amet. Ut enim blandit volutpat maecenas volutpat blandit aliquam etiam. Id donec ultrices tincidunt arcu. Id cursus metus aliquam eleifend mi.
 
 Tempus quam pellentesque nec nam aliquam sem. Risus at ultrices mi tempus imperdiet. Id porta nibh venenatis cras sed felis eget velit. Ipsum a arcu cursus vitae. Facilisis magna etiam tempor orci eu lobortis elementum. Tincidunt dui ut ornare lectus sit. Quisque non tellus orci ac. Blandit libero volutpat sed cras. Nec tincidunt praesent semper feugiat nibh sed pulvinar proin gravida. Egestas integer eget aliquet nibh praesent tristique magna.
+
+<!-- Iklan Melayang di Bawah -->
+<style>
+#iklan-melayang {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: #fff;
+  border-top: 1px solid #ccc;
+  z-index: 9999;
+  padding: 10px;
+  text-align: center;
+  box-shadow: 0 -2px 8px rgba(0,0,0,0.2);
+}
+#iklan-melayang .tutup-iklan {
+  position: absolute;
+  top: 5px;
+  right: 10px;
+  font-size: 16px;
+  cursor: pointer;
+  color: #999;
+}
+@media screen and (max-width: 600px) {
+  #iklan-melayang {
+    font-size: 14px;
+    padding: 8px;
+  }
+}
+</style>
+
+<div id="iklan-melayang">
+  <span class="tutup-iklan" onclick="document.getElementById('iklan-melayang').style.display='none'">✕</span>
+  <a href="https://link-iklan-anda.com" target="_blank" rel="noopener">
+    <img src="https://via.placeholder.com/300x50?text=Iklan+Anda" alt="Iklan Anda">
+  </a>
+</div>
+
