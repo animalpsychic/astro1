@@ -66,5 +66,5 @@ Tempus quam pellentesque nec nam aliquam sem. Risus at ultrices mi tempus imperd
 
 <div id="iklan-teks">
   <span class="tutup-iklan" onclick="document.getElementById('iklan-teks').style.display='none'">✕</span>
-  Dapatkan layanan spiritual terbaik untuk cinta & rezeki! 👉 <a href="https://link-iklan-anda.com" target="_blank">Klik di sini</a>
+  Layanan cinta & rezeki! 👉 <a href="https://link-iklan-anda.com" target="_blank">Klik di sini</a>
 </div>
