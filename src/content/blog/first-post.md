@@ -6,7 +6,7 @@ heroImage: "/blog-placeholder-3.jpg"
 ---
 ## Daftar Isi
 - [Pendahuluan](#pendahuluan)
-- [Teknik Dasar](#teknik-dasar)
+- [Teknik ](#teknik-dasar)
 - [Penutup](#penutup)
 
 ## Pendahuluan
