@@ -19,3 +19,91 @@ const { Content } = await render(post);
 <BlogPost {...post.data}>
 	<Content />
 </BlogPost>
+
+---
+import { getCollection } from 'astro:content';
+import MarkdownLayout from '../../layouts/MarkdownLayout.astro';
+import { getRelatedAndAdjacentPosts } from '../../lib/post-utils';
+
+export async function getStaticPaths() {
+    const blog = await getCollection('blog');
+    return blog.map(post => ({
+        params: { slug: post.slug },
+        props: { post },
+    }));
+}
+
+const { post } = Astro.props;
+const { Content } = await post.render();
+
+// Call the utility function here
+const { relatedPosts, prevPost, nextPost } = await getRelatedAndAdjacentPosts(post);
+---
+
+<MarkdownLayout frontmatter={post.data}>
+    <Content />
+
+    {relatedPosts.length > 0 && (
+      <div class="related-posts">
+        <h2>Postingan Terkait</h2>
+        <ul>
+          {relatedPosts.map(relatedPost => (
+            <li>
+              <a href={`/blog/${relatedPost.slug}`}>
+                {relatedPost.data.title}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    )}
+
+    <div class="next-prev-nav">
+      {prevPost && (
+        <a href={`/blog/${prevPost.slug}`} class="prev-link">
+          &larr; Sebelumnya: {prevPost.data.title}
+        </a>
+      )}
+      {nextPost && (
+        <a href={`/blog/${nextPost.slug}`} class="next-link">
+          Selanjutnya: {nextPost.data.title} &rarr;
+        </a>
+      )}
+    </div>
+</MarkdownLayout>
+
+<style>
+  /* Basic styling for the related posts and navigation */
+  .related-posts {
+    margin-top: 4rem;
+    padding-top: 2rem;
+    border-top: 1px solid #e5e5e5;
+  }
+  .related-posts h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+  }
+  .related-posts ul {
+    list-style: none;
+    padding: 0;
+  }
+  .related-posts li {
+    margin-bottom: 0.5rem;
+  }
+
+  .next-prev-nav {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 1px solid #e5e5e5;
+  }
+  .next-prev-nav a {
+    text-decoration: none;
+    color: #007bff;
+    transition: color 0.2s ease-in-out;
+  }
+  .next-prev-nav a:hover {
+    color: #0056b3;
+  }
+</style>
