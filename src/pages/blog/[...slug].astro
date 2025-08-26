@@ -1,7 +1,6 @@
 ---
-import { type CollectionEntry, getCollection } from 'astro:content';
+import { type CollectionEntry, getCollection, render } from 'astro:content';
 import BlogPost from '../../layouts/BlogPost.astro';
-import { render } from 'astro:content';
 
 export async function getStaticPaths() {
 	const posts = await getCollection('blog');
@@ -10,70 +9,72 @@ export async function getStaticPaths() {
 		props: post,
 	}));
 }
+
 type Props = CollectionEntry<'blog'>;
 
 const post = Astro.props;
 const { Content } = await render(post);
+
+// --- Logika untuk mencari Related & Next/Previous Posts ---
+const allPosts = await getCollection('blog');
+
+// Urutkan postingan berdasarkan tanggal untuk navigasi Next/Previous
+const sortedPosts = allPosts.sort(
+	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
+
+const currentIndex = sortedPosts.findIndex(
+	(p) => p.id === post.id
+);
+
+const prevPost = currentIndex > 0 ? sortedPosts[currentIndex - 1] : null;
+const nextPost = currentIndex < sortedPosts.length - 1 ? sortedPosts[currentIndex + 1] : null;
+
+// Filter untuk postingan terkait (berdasarkan tanggal publikasi)
+const thirtyDaysInMs = 30 * 24 * 60 * 60 * 1000;
+const relatedPosts = sortedPosts
+  .filter((p) => p.id !== post.id) // Pastikan postingan saat ini tidak masuk
+  .filter((p) => {
+    const diff = Math.abs(p.data.pubDate.valueOf() - post.data.pubDate.valueOf());
+    return diff <= thirtyDaysInMs;
+  })
+  .slice(0, 3); // Ambil hingga 3 postingan terkait
+
 ---
 
 <BlogPost {...post.data}>
 	<Content />
+
+	{relatedPosts.length > 0 && (
+		<div class="related-posts">
+			<h2>Postingan Terkait</h2>
+			<ul>
+				{relatedPosts.map(relatedPost => (
+					<li>
+						<a href={`/blog/${relatedPost.id}`}>
+							{relatedPost.data.title}
+						</a>
+					</li>
+				))}
+			</ul>
+		</div>
+	)}
+
+	<div class="next-prev-nav">
+		{prevPost && (
+			<a href={`/blog/${prevPost.id}`} class="prev-link">
+				&larr; Sebelumnya: {prevPost.data.title}
+			</a>
+		)}
+		{nextPost && (
+			<a href={`/blog/${nextPost.id}`} class="next-link">
+				Selanjutnya: {nextPost.data.title} &rarr;
+			</a>
+		)}
+	</div>
 </BlogPost>
 
----
-import { getCollection } from 'astro:content';
-import MarkdownLayout from '../../layouts/MarkdownLayout.astro';
-import { getRelatedAndAdjacentPosts } from '../../lib/post-utils';
-
-export async function getStaticPaths() {
-    const blog = await getCollection('blog');
-    return blog.map(post => ({
-        params: { slug: post.slug },
-        props: { post },
-    }));
-}
-
-const { post } = Astro.props;
-const { Content } = await post.render();
-
-// Call the utility function here
-const { relatedPosts, prevPost, nextPost } = await getRelatedAndAdjacentPosts(post);
----
-
-<MarkdownLayout frontmatter={post.data}>
-    <Content />
-
-    {relatedPosts.length > 0 && (
-      <div class="related-posts">
-        <h2>Postingan Terkait</h2>
-        <ul>
-          {relatedPosts.map(relatedPost => (
-            <li>
-              <a href={`/blog/${relatedPost.slug}`}>
-                {relatedPost.data.title}
-              </a>
-            </li>
-          ))}
-        </ul>
-      </div>
-    )}
-
-    <div class="next-prev-nav">
-      {prevPost && (
-        <a href={`/blog/${prevPost.slug}`} class="prev-link">
-          &larr; Sebelumnya: {prevPost.data.title}
-        </a>
-      )}
-      {nextPost && (
-        <a href={`/blog/${nextPost.slug}`} class="next-link">
-          Selanjutnya: {nextPost.data.title} &rarr;
-        </a>
-      )}
-    </div>
-</MarkdownLayout>
-
 <style>
-  /* Basic styling for the related posts and navigation */
   .related-posts {
     margin-top: 4rem;
     padding-top: 2rem;
