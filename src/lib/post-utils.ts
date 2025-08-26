@@ -15,12 +15,13 @@ export async function getRelatedAndAdjacentPosts(currentPost: any) {
   const prevPost = currentIndex > 0 ? posts[currentIndex - 1] : null;
   const nextPost = currentIndex < posts.length - 1 ? posts[currentIndex + 1] : null;
 
-  // Filter for related posts (by tags)
+  // Filter for related posts by publication date
+  const thirtyDaysInMs = 30 * 24 * 60 * 60 * 1000;
   const relatedPosts = posts
-    .filter(post =>
-      currentPost.data.tags && post.data.tags &&
-      currentPost.data.tags.some((tag: string) => post.data.tags.includes(tag))
-    )
+    .filter(post => {
+      const diff = Math.abs(currentPost.data.pubDate.valueOf() - post.data.pubDate.valueOf());
+      return diff <= thirtyDaysInMs;
+    })
     .slice(0, 3); // Get up to 3 related posts
 
   return { relatedPosts, prevPost, nextPost };
